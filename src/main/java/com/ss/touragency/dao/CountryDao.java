@@ -22,7 +22,6 @@ public class CountryDao {
         ResultSet resultSet = statement.executeQuery(sql);
 
         while(resultSet.next()){
-
             country = new Country();
             country.setIdCountry(resultSet.getInt("idCountry"));
             country.setCountryName(resultSet.getString("countryName"));
