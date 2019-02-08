@@ -1,7 +1,7 @@
 package com.ss.touragency;
 
 import com.ss.touragency.dao.CountryDao;
-import com.ss.touragency.dao.DBConnection;
+import com.ss.touragency.dbConnection.DBConnection;
 import com.ss.touragency.entity.Country;
 
 import java.sql.SQLException;

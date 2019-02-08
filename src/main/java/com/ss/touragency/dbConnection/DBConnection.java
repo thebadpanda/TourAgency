@@ -1,4 +1,4 @@
-package com.ss.touragency.dao;
+package com.ss.touragency.dbConnection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

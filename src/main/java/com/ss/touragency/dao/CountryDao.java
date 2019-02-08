@@ -1,5 +1,6 @@
 package com.ss.touragency.dao;
 
+import com.ss.touragency.dbConnection.DBConnection;
 import com.ss.touragency.entity.Country;
 
 import java.sql.ResultSet;
@@ -20,6 +21,7 @@ public class CountryDao {
         Statement statement = DBConnection.getDbConnection().createStatement();
 
         ResultSet resultSet = statement.executeQuery(sql);
+
 
         while(resultSet.next()){
             country = new Country();
