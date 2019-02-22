@@ -6,15 +6,49 @@ import java.sql.SQLException;
 
 public class DBConnection {
 
-    public static Connection getDbConnection() throws SQLException {
+    private static Connection connection;
 
-        String url = "jdbc:mysql://localhost:3306/mydb" + "?useUnicode=true&useSSL=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-        String user = "root";
-        String password = "admin";
+    private static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/mydb"
+            + "?useUnicode=true&useSSL=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private static final String DB_USER = "root";
+    private static final String DB_PASSWORD = "admin";
 
-        return DriverManager.getConnection(url, user, password);
+    public static Connection getDbConnection() {
+
+        if (connection == null) {
+            connection = initConnection();
+        }
+
+        return connection;
     }
 
+    public void closeConnection() {
 
+        if (connection == null) {
+            return;
+        }
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static Connection initConnection() {
+
+        try {
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            } catch (ClassNotFoundException e) {
+                System.out.println("Cant find the jdbc driver");
+            }
+            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return connection;
+
+    }
 
 }
