@@ -39,9 +39,6 @@ public class HotelInfoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
 
-//        if(request.getParameter("data-hotelName") != null){
-//            System.out.println(request.getAttribute("data-hotelName"));
-//        }
         String countryName = request.getParameter("country");
         String cityName = request.getParameter("city");
 
@@ -147,8 +144,6 @@ public class HotelInfoServlet extends HttpServlet {
                 out.flush();
             }
         }
-
-
         if (!response.isCommitted()) {
             request.getRequestDispatcher(PathToJsp.HOTEL_JSP).forward(request, response);
         }

@@ -42,17 +42,18 @@ public class OrderDetailsServlet extends HttpServlet {
 
         String beginDate = request.getParameter("beginDate");
         String endDate = request.getParameter("endDate");
+        String hotelName = request.getParameter("data-hotelName");
 
         if (beginDate != null && endDate != null) {
             request.getSession().setAttribute(Attribute.BEGIN_DATE, beginDate);
             request.getSession().setAttribute(Attribute.END_DATE, endDate);
+        }else{
+            request.getRequestDispatcher(PathToJsp.ORDER_JSP).forward(request, response);
         }
-        if (request.getParameter("data-hotelName") != null || request.getSession().getAttribute(Attribute.HOTEL_NAME) != null) {
-            System.out.println(request.getParameter("data-hotelName"));
-            if (request.getParameter("data-hotelName") != null) {
-                String hotelName = request.getParameter("data-hotelName");
-                request.getSession().setAttribute(Attribute.HOTEL_NAME, hotelName);
-            }
+
+        if (request.getParameter("data-hotelName") != null && !request.getParameter("data-hotelName").isEmpty()) {
+            request.getSession().setAttribute(Attribute.HOTEL_NAME, hotelName);
+
             if (request.getSession().getAttribute(Attribute.CLIENT_ID) != null) {
                 Long id = Long.parseLong((String) request.getSession().getAttribute(Attribute.CLIENT_ID));
                 String hotelNamee = String.valueOf(request.getSession().getAttribute(Attribute.HOTEL_NAME));
@@ -68,14 +69,13 @@ public class OrderDetailsServlet extends HttpServlet {
 
             try {
                 Context.getInstance().getOrderDetailsService().createOrder(client, hotel, beginDateS, endDateS);
-            } catch (ParseException | SQLException e ) {
-                request.setAttribute(Attribute.ERROR, "Oops...Error creating order details. Please try again");
+            } catch (ParseException | SQLException | NullPointerException e) {
+                request.setAttribute(Attribute.ERROR, "Oops...Error creating order details. Please try again" + e.getLocalizedMessage());
             }
-
             System.out.println(beginDate + endDate);
         }
-        request.getRequestDispatcher(PathToJsp.ORDER_JSP).forward(request, response);
+        if (!response.isCommitted()){
+            request.getRequestDispatcher(PathToJsp.ORDER_JSP).forward(request, response);
+        }
     }
-
-
 }

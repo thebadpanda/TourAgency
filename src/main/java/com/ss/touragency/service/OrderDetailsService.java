@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class OrderDetailsService {
+
     public boolean createOrder(Client client, Hotel hotel, String beginDate, String endDate) throws ParseException, SQLException {
 
         boolean status = false;

@@ -18,17 +18,12 @@ public class OrderDetailsDao implements ICrudDao<OrderDetails> {
         Connection connection = DBConnection.getDbConnection();
 
         if(connection != null){
-            //            try {
                 PreparedStatement preparedStatement = connection.prepareStatement(insertOrderDetails);
                 preparedStatement.setLong(1, orderDetails.getClient().getIdClient());
                 preparedStatement.setLong(2, orderDetails.getHotel().getHotelId());
                 preparedStatement.setDate(3, orderDetails.getBeginDate());
                 preparedStatement.setDate(4, orderDetails.getEndDate());
-
                 preparedStatement.executeUpdate();
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
         }
     }
 

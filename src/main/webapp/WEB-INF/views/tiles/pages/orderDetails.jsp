@@ -46,17 +46,15 @@
                     dataType: "json",
                     url: "/orderDetails",
                     data: {beginDate: begin, endDate: end},
-                    success : function(data){
+                    success: function (data) {
                         console.log(data);
                     },
-                    error : function (data) {
+                    error: function (data) {
                         console.log(data);
                     }
                 });
             })
         });
-
-
 
 
     </script>
@@ -94,7 +92,7 @@
 
 <form method="post" action="orderDetails">
     <div class="container">
-        <button id="submitBtn" class="btn btn-primary" value="btn btn-primary" >Submit</button>
+        <button id="submitBtn" class="btn btn-primary" value="btn btn-primary">Submit</button>
 
     </div>
 </form>
